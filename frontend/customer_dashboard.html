@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Rydo</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2 class="brand">Rydo</h2>
+            <ul>
+                <li class="active"><a href="customer_dashboard.html" onclick="loadPage('home'); return false;">Dashboard</a></li>
+                <li><a href="cus_book_ride.html" onclick="loadPage('book-ride'); return false;">Book a Ride</a></li>
+                <li><a href="cus_ride_history.html" onclick="loadPage('ride-history'); return false;">Ride History</a></li>
+                <li><a href="cus_profile.html" onclick="loadPage('profile'); return false;">Profile</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content" id="main-content">
+            <h1>Welcome, <span id="customer-name">User</span></h1>
+            <p>Your ride awaits. Let's get started!</p>
+            <button onclick="bookRide()">Book a Ride</button>
+            <div id="ride-status"></div>
+        </main>
+    </div>
+
+    <script>
+    
+        function bookRide(){
+            window.location.href="cus_book_ride.html";
+        }
+
+    </script>
+</body>
+</html>

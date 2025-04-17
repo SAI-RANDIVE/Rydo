@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard - Rydo</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2 class="brand">Rydo</h2>
+            <ul>
+                <li class="active"><a href="driver_dashboard_home.html" onclick="loadPage('home'); return false;">Dashboard</a></li>
+                <li><a href="driver_requests.html" onclick="loadPage('requests'); return false;">Ride Requests</a></li>
+                <li><a href="driver_ride_history.html" onclick="loadPage('ride-history'); return false;">Ride History</a></li>
+                <li><a href="driver_profile.html" onclick="loadPage('profile'); return false;">Profile</a></li>
+                <li><a href="index.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content" id="main-content">
+            <h1>Welcome, <span id="driver-name">Driver</span></h1>
+            <p>Get ready for your next ride!</p>
+            <button onclick="checkRequests()">Check Ride Requests</button>
+            <div id="request-status"></div>
+        </main>
+    </div>
+
+    <script>
+        function loadPage(page) {
+            let pageUrl = "";
+
+            switch (page) {
+                case 'home':
+                    pageUrl = "driver_dashboard_home.html";
+                    break;
+                case 'requests':
+                    pageUrl = "driver_requests.html";
+                    break;
+                case 'ride-history':
+                    pageUrl = "driver_ride_history.html";
+                    break;
+                case 'profile':
+                    pageUrl = "driver_profile.html";
+                    break;
+            }
+
+            if (pageUrl) {
+                fetch(pageUrl)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById("main-content").innerHTML = html;
+                    })
+                    .catch(error => console.error("Error loading page:", error));
+            }
+        }
+    </script>
+</body>
+</html>

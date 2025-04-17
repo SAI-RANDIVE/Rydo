@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rydo - Signup</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h2>Create Your <span class="brand">Rydo</span> Account</h2>
+        <form id="signupForm">
+            <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <select name="role" id="role">
+                <option value="drivers">Driver</option>
+                <option value="customers">Customer</option>
+
+            </select>
+
+            
+            <!-- IMPORTANT: use type="button" so it doesn't auto-submit -->
+            <button type="button" id="signupBtn">Sign Up</button>
+        
+            <p class="or-text">Or</p>
+            <a href="backend/auth/google-login.php" class="google-login">
+                <img src="../frontend/images/gl.png" alt=""> Sign Up with Google
+            </a>
+        
+            <p class="register-text">Already have an account? <a href="index.html">Login</a></p>
+        </form>
+        
+        
+        
+
+
+    </div>
+
+    <script>
+        document.getElementById('signupBtn').addEventListener('click', function () {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+
+            if (!name || !email || !password) {
+                alert("Please fill in all fields.");
+                return;
+            }
+        
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("role", role);
+
+        
+            fetch('../backend/auth/signup.php', {
+    method: 'POST',
+    body: formData
+})
+.then(res => res.text()) // ← get raw text first
+.then(text => {
+    try {
+        const data = JSON.parse(text);
+        alert(data.message);
+    } catch (err) {
+        console.error("Response is not valid JSON:", text);
+        alert("Server error. Please try again.");
+    }
+})
+.catch(err => {
+    console.error("Fetch error:", err);
+    alert("Network error. Please try again.");
+});
+
+        });
+        </script>
+        
+        
+</body>
+
+</html>

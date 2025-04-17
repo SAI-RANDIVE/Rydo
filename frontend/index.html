@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Rydo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        .body{
+            background-image: url('./images/logo.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Fixed path -->
+
+        <div class="welcome-box">
+            <h1 id="welcome-text"></h1>
+            <p class="select-role-text">Select your role to continue</p>
+        </div>
+
+        <div class="role-buttons">
+            <button class="role-btn customer" onclick="setUserRole('customers')">Customer</button>
+            <button class="role-btn driver" onclick="setUserRole('drivers')">Driver</button>
+        </div>
+    </div>
+
+    <script>
+        // Typing effect for "Welcome to Rydo"
+        const text = "Welcome to Rydo";
+        let i = 0;
+        function typeEffect() {
+            if (i < text.length) {
+                document.getElementById("welcome-text").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeEffect, 100);
+            }
+        }
+
+        // GSAP Animations
+        gsap.from(".welcome-box", { opacity: 0, y: -50, duration: 1 });
+        gsap.from(".role-buttons", { opacity: 0, y: 50, duration: 1.2, delay: 1 });
+
+        // Store user role and redirect to login page
+        function setUserRole(role) {
+          
+            sessionStorage.setItem("userRole", role);
+            window.location.href = "login.html";  // Redirects to login
+            
+        }
+
+        // Start the typing effect on page load
+        window.onload = typeEffect;
+    </script>
+
+</body>
+</html>
